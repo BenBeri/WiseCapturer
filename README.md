@@ -31,4 +31,10 @@ Captures a gif animation image of the selected area
 
 Creating the instance
 ---------------------
-*to be edited*
+
+`Bootstrap` is the main class in WiseCapturer, therefore you need to create a new instance of it.
+Bootstrap requires an instance of `Capturer`, any of the capturers I have included in this library.
+
+For instance:
+
+  Bootstrap b = new Bootstrap(new ScreenshotCapturer());
