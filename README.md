@@ -38,3 +38,24 @@ Bootstrap requires an instance of `Capturer`, any of the capturers I have includ
 For instance:
 
 		Bootstrap b = new Bootstrap(new ScreenshotCapturer());
+
+Capturing an area
+-----------------
+
+To capture an area, you need to call `Bootstrap#beginCapture` method which requires an instance of `ScreenCaptureCallback`
+
+for instance:
+
+		Bootstrap b = new Bootstrap(new GifCapturer());
+		b.beginCapture(new ScreenCaptureCallback() {
+			@Override
+			public void captureEnded(File file) {
+				System.out.println("Hello World!");
+			}
+		});
+
+In the example above, beginCapturer recevies a new instance of `ScreenCaptureCallback`, that class gets the captured file from the library, it basiaclly listens and waits till the capturer sends the captured result.
+
+`ScreenCaptureCallback#captureEnded` gets called by the `Capturer` class, when the capturing process has ended and is ready to be sent.
+
+The file you receive as a parameter in `ScreenCaptureCallback~#captureEnded` is the ready file image, you either upload it, or convert it to BufferedImage and do whatever you want. The file is saved into a temporary file, therefore you can't have multiple screenshots at a time.
