@@ -12,13 +12,23 @@ Get Started
 Firstly, for your capturing instance, you need to select a capturer - there are currently two capturing tools:
 
 
-*ScreenshotCapturer* - Captures a simple PNG image of the selected area.
-Hotkeys: ESCAPE to cancel selection
+ScreenshotCapturer
+------------------
 
-*GifCapturer* - Captures a gif animation image of the selected area
-Hotkeys: ESCAPE to cancel selection, ENTER to finish capture, and save.
+Captures a simple PNG image of the selected area.
+
+**Hotkeys**
+`ESCAPE` to cancel selection
+
+GifCapturer 
+-----------
+Captures a gif animation image of the selected area
+
+**Hotkeys** 
+`ESCAPE` to cancel selection
+`ENTER` to finish capture, and save.
 
 
-*Creating the instance*
-
+Creating the instance
+---------------------
 *to be edited*
