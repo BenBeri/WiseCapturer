@@ -37,4 +37,4 @@ Bootstrap requires an instance of `Capturer`, any of the capturers I have includ
 
 For instance:
 
-  Bootstrap b = new Bootstrap(new ScreenshotCapturer());
+		Bootstrap b = new Bootstrap(new ScreenshotCapturer());
