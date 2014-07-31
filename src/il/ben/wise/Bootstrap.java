@@ -1,25 +1,10 @@
 package il.ben.wise;
 
 import il.ben.wise.capture.Capturer;
-import il.ben.wise.capture.exception.NoCaptureFoundException;
-import il.ben.wise.capture.exception.WiseCaptureException;
-import il.ben.wise.capture.impl.ScreenshotCapturer;
-import il.ben.wise.capture.impl.gif.GifCapturer;
 import il.ben.wise.listeners.ScreenCaptureCallback;
 
 import java.awt.AWTException;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
-
-import com.tulskiy.keymaster.common.Provider;
 
 /**
  * The boostrap class

@@ -19,7 +19,6 @@ public class GifCaptureBorder extends JFrame {
 	
 	public GifCaptureBorder(int x, int y, int width, int height) {
 		super.setLayout(new BorderLayout());
-		
 		x -= tickness;
 		y -= tickness;
 		width += tickness * 2;
@@ -29,7 +28,8 @@ public class GifCaptureBorder extends JFrame {
 		super.setLocation(x, y);
 		
 		super.setUndecorated(true);
-		super.setBackground(new Color(255, 255, 255, 1));
+		super.setBackground(new Color(255, 255, 255, 0));
+		super.setAlwaysOnTop(true);
 		
 		this.border = new Border(width, height);
 		
@@ -69,7 +69,7 @@ public class GifCaptureBorder extends JFrame {
 	private class Border extends JPanel {
 		
 		public Border(int width, int height) {
-			super.setBackground(new Color(255, 255, 255, 1));
+			super.setBackground(new Color(255, 255, 255, 0));
 			super.setSize(width, height);
 			super.setLocation(0, 0);
 			super.setBorder(BorderFactory.createLineBorder(Color.RED, tickness));

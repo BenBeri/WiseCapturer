@@ -33,9 +33,10 @@ public class CaptureCamera extends JFrame {
 	/**
 	 * Current Capturer instance
 	 */
-	private Capturer currentCapturer;
+	private Capturer c;
 	
-	public CaptureCamera() throws AWTException {
+	public CaptureCamera(Capturer c) throws AWTException {
+		this.c = c;
 		this.toolkit = Toolkit.getDefaultToolkit();
 		this.screen = this.toolkit.getScreenSize();
 		this.robot = new Robot();
@@ -57,8 +58,7 @@ public class CaptureCamera extends JFrame {
 	 * Starts area selection event
 	 * @param c Capturer instance
 	 */
-	public void startSelection(Capturer c) {
-		this.currentCapturer = c;
+	public void startSelection() {
 		super.setVisible(true);
 	}
 	
@@ -85,7 +85,7 @@ public class CaptureCamera extends JFrame {
 	 */
 	public void endSelection() {
 		this.setVisible(false);
-		this.currentCapturer.startCapturing(this.selector.getCameraX(), 
+		this.c.startCapturing(this.selector.getCameraX(), 
 				this.selector.getCameraY(),
 				this.selector.getCameraWidth(), 
 				this.selector.getCameraHeight());

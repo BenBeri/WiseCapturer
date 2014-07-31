@@ -5,6 +5,8 @@ import il.ben.wise.CaptureCamera;
 import il.ben.wise.listeners.ScreenCaptureCallback;
 
 import java.awt.AWTException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import com.tulskiy.keymaster.common.Provider;
@@ -35,13 +37,12 @@ public abstract class Capturer {
 	private Provider provider;
 	
 	/**
-	 * The captured file
+	 * The captured file data
 	 */
-	private File captured;
+	private ByteArrayInputStream captured;
 	
 	public Capturer() throws AWTException {
-		this.camera = new CaptureCamera();
-		this.provider = Provider.getCurrentProvider(false);
+		this.camera = new CaptureCamera(this);
 	}
 	
 	/**
@@ -72,7 +73,7 @@ public abstract class Capturer {
 	 * Gets the captured file result
 	 * @return
 	 */
-	public File getCapturedResult() {
+	public ByteArrayInputStream getCapturedResult() {
 		return this.captured;
 	}
 	
@@ -80,6 +81,7 @@ public abstract class Capturer {
 	 * Disables the capture frame
 	 */
 	public void disableSelectionFrame() {
+		System.out.println("called");
 		this.camera.setVisible(false);
 	}
 	
@@ -87,15 +89,20 @@ public abstract class Capturer {
 	 * Sets a new captured file result
 	 * @param file
 	 */
-	public void setCaptureResult(File file) {
-		this.captured = file;
+	public void setCaptureResult(ByteArrayOutputStream file) {
+		this.captured = new ByteArrayInputStream(file.toByteArray());
 	}
 	
 	/**
 	 * Finishes capture, sends back a reply to the callback event
 	 */
 	protected void finish() {
-		this.callback.captureEnded(this.captured);
+		this.provider.stop();
+		this.callback.captureEnded(new CapturedImage(this.captured));
+	}
+	
+	protected void init() {
+		this.provider = Provider.getCurrentProvider(false);
 	}
 	
 	/**

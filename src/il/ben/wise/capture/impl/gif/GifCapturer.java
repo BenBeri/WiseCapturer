@@ -2,7 +2,9 @@ package il.ben.wise.capture.impl.gif;
 
 import java.awt.AWTException;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +12,7 @@ import java.util.Timer;
 
 import javax.swing.KeyStroke;
 
-import com.gif4j.light.GifEncoder;
-import com.gif4j.light.GifFrame;
-import com.gif4j.light.GifImage;
-
+import il.ben.util.AnimatedGifEncoder;
 import il.ben.wise.capture.Capturer;
 import il.ben.wise.listeners.CancelCapture;
 import il.ben.wise.listeners.FinishGifCapture;
@@ -33,7 +32,6 @@ public class GifCapturer extends Capturer {
 	
 	public GifCapturer() throws AWTException {
 		super();
-		this.setHotkeys();
 	}
 
 	public void addFrame(BufferedImage i) {
@@ -42,7 +40,9 @@ public class GifCapturer extends Capturer {
 	
 	@Override
 	public void beginSelection() {
-		super.getCamera().startSelection(this);
+		super.init();
+		this.setHotkeys();
+		super.getCamera().startSelection();
 	}
 
 	@Override
@@ -57,32 +57,31 @@ public class GifCapturer extends Capturer {
 	 * Creates a new animated image with the GIF format using GIF4J library
 	 */
 	public void createGif() {
-		try {
-			super.disableSelectionFrame();
-	
-			GifImage gif = new GifImage();
-			gif.setDefaultDelay(10);
-			
-			this.border.updateProgress(10);
-			for(int i = 0; i < this.frames.size(); i++) {
-				gif.addGifFrame(new GifFrame(this.frames.get(i)));
-			}
-			this.border.updateProgress(50);
-			
-			GifEncoder.encode(gif, new File("random.gif"));
-			super.setCaptureResult(new File("random.gif"));
-			this.border.updateProgress(100);
-			
-			super.finish();
-			this.border.setVisible(false);
-			this.border = null;
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		super.disableSelectionFrame();
+
+		AnimatedGifEncoder gif = new AnimatedGifEncoder();
+		
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		gif.start(stream);
+		gif.setDelay(1000);
+		
+		this.border.updateProgress(10);
+		
+		for(int i = 0; i < this.frames.size(); i++) {
+			gif.addFrame(this.frames.get(i));
 		}
+		
+		this.border.updateProgress(50);
+		
+		gif.finish();
+		
+		super.setCaptureResult(stream);
+		
+		this.border.updateProgress(100);
+		
+		super.finish();
+		this.border.setVisible(false);
+		this.border = null;
 	}
 	
 	/**
@@ -96,6 +95,7 @@ public class GifCapturer extends Capturer {
 
 	@Override
 	public void setHotkeys() {
+		System.out.println("hey!");
 		super.getProvider().register(KeyStroke.getKeyStroke("ESCAPE"), new CancelCapture(this));
 		super.getProvider().register(KeyStroke.getKeyStroke("ENTER"), new FinishGifCapture(this));
 	}

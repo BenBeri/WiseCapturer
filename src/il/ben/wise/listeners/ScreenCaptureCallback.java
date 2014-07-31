@@ -1,6 +1,6 @@
 package il.ben.wise.listeners;
 
-import java.io.File;
+import il.ben.wise.capture.CapturedImage;
 
 /**
  * This listener is used to let the application that uses this library 
@@ -9,5 +9,5 @@ import java.io.File;
  *
  */
 public interface ScreenCaptureCallback {
-	public void captureEnded(File file);
+	public void captureEnded(CapturedImage captured);
 }
