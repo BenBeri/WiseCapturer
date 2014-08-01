@@ -49,12 +49,15 @@ for instance:
 		Bootstrap b = new Bootstrap(new GifCapturer());
 		b.beginCapture(new ScreenCaptureCallback() {
 			@Override
-			public void captureEnded(File file) {
+			public void captureEnded(CapturedImage image) {
 				System.out.println("Hello World!");
 			}
 		});
 
-In the example above, beginCapturer recevies a new instance of `ScreenCaptureCallback`, that class gets the captured file from the library, it basiaclly listens and waits till the capturer sends the captured result.
+In the example above, beginCapturer recevies a new instance of `ScreenCaptureCallback`, that class gets the CapturedImage object from the library, it basiaclly listens and waits till the capturer sends the captured result.
+
+
+
 
 `ScreenCaptureCallback#captureEnded` gets called by the `Capturer` class, when the capturing process has ended and is ready to be sent.
 
