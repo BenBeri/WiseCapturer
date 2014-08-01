@@ -41,8 +41,13 @@ public abstract class Capturer {
 	 */
 	private ByteArrayInputStream captured;
 	
-	public Capturer() throws AWTException {
-		this.camera = new CaptureCamera(this);
+	public Capturer() {
+		try {
+			this.camera = new CaptureCamera(this);
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

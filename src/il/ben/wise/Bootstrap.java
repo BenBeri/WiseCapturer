@@ -1,10 +1,13 @@
 package il.ben.wise;
 
 import il.ben.wise.capture.Capturer;
+import il.ben.wise.capture.impl.ScreenshotCapturer;
 import il.ben.wise.listeners.ScreenCaptureCallback;
 
 import java.awt.AWTException;
 import java.io.File;
+
+import javax.swing.SwingUtilities;
 
 /**
  * The boostrap class
@@ -34,7 +37,7 @@ public class Bootstrap {
 	 * 				Capturer instance
 	 * @throws AWTException
 	 */
-	public Bootstrap(Capturer c) throws AWTException {
+	public Bootstrap(Capturer c) {
 		this.capturer = c;
 	}
 	
@@ -46,9 +49,15 @@ public class Bootstrap {
 	 * @param c
 	 * 			Callback instance
 	 */
-	public void beginCapture(ScreenCaptureCallback c) {
-		this.capturer.setCallback(c);
-		this.capturer.beginSelection();
+	public void beginCapture(final ScreenCaptureCallback c) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				capturer.setCallback(c);
+				capturer.beginSelection();
+				
+			}
+		});
 	}
 	
 	/**

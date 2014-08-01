@@ -21,7 +21,7 @@ import il.ben.wise.listeners.CancelCapture;
  */
 public class ScreenshotCapturer extends Capturer {
 
-	public ScreenshotCapturer() throws AWTException {
+	public ScreenshotCapturer() {
 		super();
 	}
 

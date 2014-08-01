@@ -30,7 +30,7 @@ public class GifCapturer extends Capturer {
 	
 	private GifCaptureBorder border;
 	
-	public GifCapturer() throws AWTException {
+	public GifCapturer() {
 		super();
 	}
 
