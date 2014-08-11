@@ -16,6 +16,11 @@ public class SelectionCamera extends JPanel {
 	private static final long serialVersionUID = -2286129793282990036L;
 
 	/**
+	 * Can the component paint the camera?
+	 */
+	private boolean paintState;
+
+	/**
 	 * X-asis coordinate of the selection area
 	 */
 	private int x;
@@ -100,6 +105,14 @@ public class SelectionCamera extends JPanel {
 	}
 	
 	/**
+	 * Sets a paint state
+	 * @param flag
+	 */
+	public void setPaintState(boolean flag) {
+		this.paintState = flag;
+	}
+	
+	/**
 	 * Sets new dimension to the area
 	 * @param width The new Width
 	 * @param height The new Height
@@ -129,12 +142,13 @@ public class SelectionCamera extends JPanel {
 	 * Clears the selection area, to be ready for the next selection.
 	 */
 	public void clear() {
-		this.x = 0;
+		this.x = 1;
 		this.y = 0;
-		this.width = 0;
-		this.height = 0;
+		this.width = 1;
+		this.height = 1;
 		this.startPoint = null;
 		this.setVisible(false);
+	
 	}
 	
 	/**

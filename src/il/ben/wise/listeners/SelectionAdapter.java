@@ -35,4 +35,8 @@ public class SelectionAdapter extends MouseAdapter {
 		this.selector.fix();
 		this.camera.endSelection();
 	}
+	
+	public void updateCamera(SelectionCamera c) {
+		this.selector = c;
+	}
 }

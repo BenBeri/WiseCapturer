@@ -16,15 +16,6 @@ import javax.swing.SwingUtilities;
  */
 public class Bootstrap {
 
-	/**
-	 * If true, all captured images will be saved as history into a folder {@link Bootstrap#folder}
-	 */
-	private boolean saveToFolder;
-	
-	/**
-	 * If {@link Bootstrap#saveToFolder}, the system will save ALL captured images to this folder
-	 */
-	private File folder;
 	
 	/**
 	 * The capturer instance, which will handle the image capturing.
@@ -60,29 +51,16 @@ public class Bootstrap {
 		});
 	}
 	
-	/**
-	 * Set save history {@link Bootstrap#saveToFolder}
-	 * @param flag
-	 */
-	public void setSaveHistory(boolean flag) {
-		this.saveToFolder = flag;
+	public void setAllowSound(boolean flag) {
+		this.capturer.setSoundAllowed(flag);
 	}
 	
-	/**
-	 * Sets history folder {@link Bootstrap#folder} by String path
-	 * @param path
-	 * 				String URL of the folder
-	 */
-	public void setHistoryFolder(String path) {
-		this.folder = new File(path);
-	}
-	
-	/**
-	 * Sets history folder {@link Bootstrap#folder} by file instance
-	 * @param path
-	 * 				File instance
-	 */
-	public void setHistoryFolder(File file) {
-		this.folder = file;
+	public void setSound(File file) {
+		try {
+			this.capturer.setSound(file);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

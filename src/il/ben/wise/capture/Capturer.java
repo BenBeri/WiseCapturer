@@ -37,6 +37,16 @@ public abstract class Capturer {
 	private Provider provider;
 	
 	/**
+	 * Should the system play a sound on capture?
+	 */
+	private boolean allowSound = false;
+	
+	/**
+	 * Sound MP3 file
+	 */
+	private File sound;
+	
+	/**
 	 * The captured file data
 	 */
 	private ByteArrayInputStream captured;
@@ -44,7 +54,8 @@ public abstract class Capturer {
 	public Capturer() {
 		try {
 			this.camera = new CaptureCamera(this);
-		} catch (AWTException e) {
+			System.err.println("[WiseCapturer] Initialized capturer");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -87,7 +98,7 @@ public abstract class Capturer {
 	 */
 	public void disableSelectionFrame() {
 		System.out.println("called");
-		this.camera.setVisible(false);
+		//this.camera.setVisible(false);
 	}
 	
 	/**
@@ -108,6 +119,23 @@ public abstract class Capturer {
 	
 	protected void init() {
 		this.provider = Provider.getCurrentProvider(false);
+		
+	}
+	
+	public void setSound(File file) throws Exception {
+		this.sound = file;
+	}
+	
+	public boolean soundAllowed() {
+		return this.allowSound;
+	}
+	
+	public void setSoundAllowed(boolean flag) {
+		this.allowSound = flag;
+	}
+	
+	public File getSound() {
+		return this.sound;
 	}
 	
 	/**

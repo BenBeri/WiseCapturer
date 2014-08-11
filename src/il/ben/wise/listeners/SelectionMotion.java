@@ -39,5 +39,7 @@ public class SelectionMotion implements MouseMotionListener {
 		
 	}
 
-
+	public void updateCamera(SelectionCamera c) {
+		this.selector = c;
+	}
 }
